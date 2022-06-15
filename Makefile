@@ -1,8 +1,8 @@
-gen:
-	npm run codegen
+gen-graph:
+	graph codegen
 
 build-graph:
-	npm run build
+	graph build
 
 deploy-graph:
 	graph deploy --product hosted-service akihokurino/seaport
