@@ -1,6 +1,29 @@
-type ExampleEntity @entity {
+type Order @entity {
   id: ID!
-  count: BigInt!
-  newCounter: BigInt! # uint256
-  offerer: Bytes! # address
+  transactionHash: Bytes!
+  transactionFromAddress: Bytes!
+  offererAddress: Bytes!
+  zoneAddress: Bytes!
+  recipientAddress: Bytes!
+  offers: [Offer!]! @derivedFrom(field: "order")
+  considerations: [Consideration!]! @derivedFrom(field: "order")
+}
+
+type Offer @entity {
+  id: ID!
+  order: Order!
+  itemType: Int!
+  tokenAddress: Bytes!
+  identifier: BigInt!
+  amount: BigInt!
+}
+
+type Consideration @entity {
+  id: ID!
+  order: Order!
+  itemType: Int!
+  tokenAddress: Bytes!
+  identifier: BigInt!
+  amount: BigInt!
+  recipientAddress: Bytes!
 }

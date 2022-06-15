@@ -751,32 +751,6 @@
         "type": "tuple[]"
       },
       {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "orderIndex",
-            "type": "uint256"
-          },
-          { "internalType": "uint256", "name": "itemIndex", "type": "uint256" }
-        ],
-        "internalType": "struct FulfillmentComponent[][]",
-        "name": "offerFulfillments",
-        "type": "tuple[][]"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "orderIndex",
-            "type": "uint256"
-          },
-          { "internalType": "uint256", "name": "itemIndex", "type": "uint256" }
-        ],
-        "internalType": "struct FulfillmentComponent[][]",
-        "name": "considerationFulfillments",
-        "type": "tuple[][]"
-      },
-      {
         "internalType": "bytes32",
         "name": "fulfillerConduitKey",
         "type": "bytes32"
@@ -954,32 +928,6 @@
         "internalType": "struct Order[]",
         "name": "orders",
         "type": "tuple[]"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "orderIndex",
-            "type": "uint256"
-          },
-          { "internalType": "uint256", "name": "itemIndex", "type": "uint256" }
-        ],
-        "internalType": "struct FulfillmentComponent[][]",
-        "name": "offerFulfillments",
-        "type": "tuple[][]"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "orderIndex",
-            "type": "uint256"
-          },
-          { "internalType": "uint256", "name": "itemIndex", "type": "uint256" }
-        ],
-        "internalType": "struct FulfillmentComponent[][]",
-        "name": "considerationFulfillments",
-        "type": "tuple[][]"
       },
       {
         "internalType": "bytes32",
