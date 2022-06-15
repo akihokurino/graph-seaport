@@ -11,7 +11,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class Order extends Entity {
+export class MatchedOrder extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -19,18 +19,18 @@ export class Order extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save Order entity without an ID");
+    assert(id != null, "Cannot save MatchedOrder entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type Order must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type MatchedOrder must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("Order", id.toString(), this);
+      store.set("MatchedOrder", id.toString(), this);
     }
   }
 
-  static load(id: string): Order | null {
-    return changetype<Order | null>(store.get("Order", id));
+  static load(id: string): MatchedOrder | null {
+    return changetype<MatchedOrder | null>(store.get("MatchedOrder", id));
   }
 
   get id(): string {
@@ -266,5 +266,91 @@ export class Consideration extends Entity {
 
   set recipientAddress(value: Bytes) {
     this.set("recipientAddress", Value.fromBytes(value));
+  }
+}
+
+export class NewOrder extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save NewOrder entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type NewOrder must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("NewOrder", id.toString(), this);
+    }
+  }
+
+  static load(id: string): NewOrder | null {
+    return changetype<NewOrder | null>(store.get("NewOrder", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get transactionHash(): Bytes {
+    let value = this.get("transactionHash");
+    return value!.toBytes();
+  }
+
+  set transactionHash(value: Bytes) {
+    this.set("transactionHash", Value.fromBytes(value));
+  }
+
+  get transactionFromAddress(): Bytes {
+    let value = this.get("transactionFromAddress");
+    return value!.toBytes();
+  }
+
+  set transactionFromAddress(value: Bytes) {
+    this.set("transactionFromAddress", Value.fromBytes(value));
+  }
+
+  get offererAddress(): Bytes {
+    let value = this.get("offererAddress");
+    return value!.toBytes();
+  }
+
+  set offererAddress(value: Bytes) {
+    this.set("offererAddress", Value.fromBytes(value));
+  }
+
+  get zoneAddress(): Bytes {
+    let value = this.get("zoneAddress");
+    return value!.toBytes();
+  }
+
+  set zoneAddress(value: Bytes) {
+    this.set("zoneAddress", Value.fromBytes(value));
+  }
+
+  get address(): Bytes {
+    let value = this.get("address");
+    return value!.toBytes();
+  }
+
+  set address(value: Bytes) {
+    this.set("address", Value.fromBytes(value));
+  }
+
+  get name(): string {
+    let value = this.get("name");
+    return value!.toString();
+  }
+
+  set name(value: string) {
+    this.set("name", Value.fromString(value));
   }
 }

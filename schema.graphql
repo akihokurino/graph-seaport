@@ -1,4 +1,4 @@
-type Order @entity {
+type MatchedOrder @entity {
   id: ID!
   transactionHash: Bytes!
   transactionFromAddress: Bytes!
@@ -11,7 +11,7 @@ type Order @entity {
 
 type Offer @entity {
   id: ID!
-  order: Order!
+  order: MatchedOrder!
   itemType: Int!
   tokenAddress: Bytes!
   identifier: BigInt!
@@ -20,10 +20,20 @@ type Offer @entity {
 
 type Consideration @entity {
   id: ID!
-  order: Order!
+  order: MatchedOrder!
   itemType: Int!
   tokenAddress: Bytes!
   identifier: BigInt!
   amount: BigInt!
   recipientAddress: Bytes!
+}
+
+type NewOrder @entity {
+  id: ID!
+  transactionHash: Bytes!
+  transactionFromAddress: Bytes!
+  offererAddress: Bytes!
+  zoneAddress: Bytes!
+  address: Bytes!
+  name: String!
 }

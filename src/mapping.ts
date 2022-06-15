@@ -1,9 +1,15 @@
-import { Consideration, Offer, Order } from "../generated/schema";
+import {
+  Consideration,
+  MatchedOrder,
+  NewOrder,
+  Offer,
+} from "../generated/schema";
 import {
   CounterIncremented,
   OrderCancelled,
   OrderFulfilled,
   OrderValidated,
+  Seaport,
 } from "../generated/Seaport/Seaport";
 
 export function handleCounterIncremented(event: CounterIncremented): void {}
@@ -11,9 +17,9 @@ export function handleCounterIncremented(event: CounterIncremented): void {}
 export function handleOrderCancelled(event: OrderCancelled): void {}
 
 export function handleOrderFulfilled(event: OrderFulfilled): void {
-  let order = Order.load(event.params.orderHash.toHex());
+  let order = MatchedOrder.load(event.params.orderHash.toHex());
   if (!order) {
-    order = new Order(event.params.orderHash.toHex());
+    order = new MatchedOrder(event.params.orderHash.toHex());
   }
 
   order.transactionHash = event.transaction.hash;
@@ -66,4 +72,19 @@ export function handleOrderFulfilled(event: OrderFulfilled): void {
   }
 }
 
-export function handleOrderValidated(event: OrderValidated): void {}
+export function handleOrderValidated(event: OrderValidated): void {
+  let seaport = Seaport.bind(event.address);
+
+  let order = NewOrder.load(event.params.orderHash.toHex());
+  if (!order) {
+    order = new NewOrder(event.params.orderHash.toHex());
+  }
+
+  order.transactionHash = event.transaction.hash;
+  order.transactionFromAddress = event.transaction.from;
+  order.offererAddress = event.params.offerer;
+  order.zoneAddress = event.params.zone;
+  order.address = seaport._address;
+  order.name = seaport._name;
+  order.save();
+}

@@ -29,4 +29,4 @@ dataSources:
           handler: handleOrderFulfilled
         - event: OrderValidated(bytes32,indexed address,indexed address)
           handler: handleOrderValidated
-      file: ./src/seaport.ts
+      file: ./src/mapping.ts
